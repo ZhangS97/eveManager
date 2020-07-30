@@ -26,7 +26,7 @@ export default new Router({
                 },
                 {
                     path: '/table',
-                    component: resolve => require(['../components/page/BaseTable.vue'], resolve),
+                    component: resolve => require(['../components/page/Market.vue'], resolve),
                     meta: { title: '基础表格' }
                 },
                 {
