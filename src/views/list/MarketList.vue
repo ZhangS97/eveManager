@@ -14,7 +14,7 @@ export default {
     };
   },
   methods: {
-    onLoadData(treeNode) {
+    onLoadData (treeNode) {
       return new Promise(resolve => {
         if (treeNode.dataRef.children) {
           resolve();
