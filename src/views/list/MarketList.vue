@@ -31,10 +31,23 @@ export default {
   methods: {
     onSelect (selectedKeys, info) {
       console.log('onSelect', selectedKeys, info)
-      selectedKeys.forEach(function (item) {
-        console.log(item)
-        this.expandedKeys.push(item)
-      }.bind(this))
+      if (selectedKeys.length > 0) {
+        selectedKeys.forEach(function (item) {
+          console.log(item)
+          this.expandedKeys.push(item)
+        }.bind(this))
+      } else {
+        for (let i = 0; i < this.expandedKeys.length; i++) {
+          const item = this.expandedKeys[i]
+          if (item === info.node.eventKey) {
+            console.log('item === info.node.eventKey', info.node.eventKey)
+            this.expandedKeys.slice(i, 1)
+            console.log(item)
+            console.log(this.expandedKeys)
+          }
+        }
+      }
+
       console.log(this.expandedKeys)
       this.selectedKeys = selectedKeys
     },
