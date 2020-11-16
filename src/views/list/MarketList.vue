@@ -41,7 +41,7 @@ export default {
           const item = this.expandedKeys[i]
           if (item === info.node.eventKey) {
             console.log('item === info.node.eventKey', info.node.eventKey)
-            this.expandedKeys.slice(i, 1)
+            this.expandedKeys.splice(i, 1)
             console.log(item)
             console.log(this.expandedKeys)
           }
