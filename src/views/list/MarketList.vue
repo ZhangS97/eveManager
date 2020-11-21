@@ -11,7 +11,9 @@
         :tree-data="treeData"
         :expanded-keys="expandedKeys"
         :auto-expand-parent="true"
-        @select="onSelect" />
+        @select="onSelect"
+        @expand="onExpand"
+      />
 
     </a-card>
   </page-header-wrapper>
@@ -31,32 +33,37 @@ export default {
   methods: {
     onSelect (selectedKeys, info) {
       console.log('onSelect', selectedKeys, info)
-      if (selectedKeys.length > 0) {
-        selectedKeys.forEach(function (item) {
-          console.log(item)
-          this.expandedKeys.push(item)
-        }.bind(this))
-      } else {
-        for (let i = 0; i < this.expandedKeys.length; i++) {
-          const item = this.expandedKeys[i]
-          if (item === info.node.eventKey) {
-            console.log('item === info.node.eventKey', info.node.eventKey)
-            this.expandedKeys.splice(i, 1)
-            console.log(item)
-            console.log(this.expandedKeys)
-          }
-        }
-      }
-
-      console.log(this.expandedKeys)
-      this.selectedKeys = selectedKeys
+      console.log('selectedKeys', selectedKeys)
+      console.log('info', info)
+      // if (selectedKeys.length > 0) {
+      //   selectedKeys.forEach(function (item) {
+      //     console.log(item)
+      //     this.expandedKeys.push(item)
+      //   }.bind(this))
+      // } else {
+      //   const keys = []
+      //   for (let i = 0; i < this.expandedKeys.length; i++) {
+      //     const item = this.expandedKeys[i]
+      //     if (item === info.node.eventKey) {
+      //
+      //     } else {
+      //       keys.push(item)
+      //     }
+      //   }
+      //   this.expandedKeys = keys
+      // }
+      //
+      // console.log(this.expandedKeys)
+      // this.selectedKeys = selectedKeys
     },
-    onExpand (expandedKeys) {
-      console.log('onExpand', expandedKeys)
+    onExpand (expandedKeys, info) {
+      console.log('onExpand', expandedKeys, info)
+      console.log('expandedKeys', expandedKeys)
+      console.log('info', info)
       // if not set autoExpandParent to false, if children expanded, parent can not collapse.
       // or, you can remove all expanded children keys.
-      this.expandedKeys = expandedKeys
-      this.autoExpandParent = false
+      // this.expandedKeys = expandedKeys
+      // this.autoExpandParent = false
     },
     onLoadData (treeNode) {
       console.log(treeNode)
@@ -66,14 +73,12 @@ export default {
           resolve()
           return
         }
-        setTimeout(() => {
-          treeNode.dataRef.children = [
-            { title: 'Child Node', key: `${treeNode.eventKey}-0` },
-            { title: 'Child Node', key: `${treeNode.eventKey}-1` }
-          ]
-          this.treeData = [...this.treeData]
-          resolve()
-        }, 1000)
+        treeNode.dataRef.children = [
+          { title: 'Child Node', key: `${treeNode.eventKey}-0` },
+          { title: 'Child Node', key: `${treeNode.eventKey}-1` }
+        ]
+        this.treeData = [...this.treeData]
+        resolve()
       })
     }
   }
