@@ -22,6 +22,9 @@ export default {
       ]
     }
   },
+  created () {
+
+  },
   methods: {
     onLoadData (treeNode) {
       return new Promise(resolve => {
