@@ -29,14 +29,12 @@ export default {
           resolve()
           return
         }
-        setTimeout(() => {
-          treeNode.dataRef.children = [
-            { title: 'Child Node', key: `${treeNode.eventKey}-0` },
-            { title: 'Child Node', key: `${treeNode.eventKey}-1` }
-          ]
-          this.treeData = [...this.treeData]
-          resolve()
-        }, 1000)
+        treeNode.dataRef.children = [
+          { title: 'Child Node', key: `${treeNode.eventKey}-0` },
+          { title: 'Child Node', key: `${treeNode.eventKey}-1` }
+        ]
+        this.treeData = [...this.treeData]
+        resolve()
       })
     }
   }
